@@ -59,7 +59,7 @@ character <- "Hi";
 …
 ```
 
-When initializing an array with brackets, values in the bracket must be literals of the same type, meaning no variables. This is also one of the
+When initializing an array with braces, values in the bracket must be literals of the same type, meaning no variables. This is also one of the
 only situations where primitive types will not be implicitly casted.
 
 ```
@@ -109,7 +109,7 @@ def func f() i32 {
 }
 ```
 
-In the parenthesis, function parameters can be listed. The type after the parenthesis is the return type. A return type can exist an if statement,
+In the parenthesis, function parameters can be listed. The type after the parenthesis is the return type. A return type can exist in an if statement,
 but the language is not sophisticated enough to detect return expressions within a statement. This means that a return value must be specified in the
 main body.
 ```
@@ -134,31 +134,27 @@ def func f() void {
 ## Operators
 There are two types of operators, arithmetic and logical.
 ### Arithmetic
-  - + and -
+  - \+ and -
   - \* and /
 ### Logical
-  - > and <
-  - >= and <=
+  - \> and <
+  - \>= and <=
   - "and"
   - "or"
   - =
-  - "not"
+  - "not" <br>
 "not" works as follows
 ```
 if (not 1 = 2) {
   $ will enter
 }
 ```
-Logical and Arithmetic operators cannot be combined in one expression, i.e.
-```
-...
-x <- 1 > 2 + 1;  $ Error
-```
+
 # Compilation
 The compiler can be compiled using the makefile, specifically rule "make rpc". <br> <br>
 As I did not make a linker, an external linker must be used to generate an executable from a source text file. Furthermore, if you use any
 of the I/O functions from standard_lib.txt/cpp, you need to link using a C++ compiler, compiling and linking standard_lib.cpp.
-So, to compile a source text file, run the compiler executable as follow:
+So, to compile a source text file, run the compiler executable as follows:
 ```
 g++ <output_name>.o standard_lib.cpp <g++ args>
 ```
