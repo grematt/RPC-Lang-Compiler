@@ -1,0 +1,134 @@
+$ -----------------------------------------------------------------
+$ I/O Functions
+$ -----------------------------------------------------------------
+
+func read_i32() i32;
+func print_ch8(ch8 ch) void;
+func read_string_by_char() ch8;
+
+def func print_string(ch8[1000] arr) void {
+  var i32 i <- 0;
+  while (not arr[i] = 0) {
+    print_ch8(arr[i]);
+    i <- i + 1;
+  }
+}
+
+$ -----------------------------------------------------------------
+$ Tic Tac Toe code
+$ -----------------------------------------------------------------
+
+def func swap(ch8[2] arr) ch8[2] {
+  var ch8 temp <- arr[0];
+  arr[0] <- arr[1];
+  arr[1] <- temp;
+  return arr;
+}
+
+def func print_board(ch8[3][3] board) void {
+  for (var i32 i <- 0; i < 3; i <- i + 1) {
+    for (var i32 j <- 0; j < 3; j <- j + 1) {
+      print_ch8(board[i][j]);
+    }
+    print_ch8('\n');
+  }
+}
+
+def func is_winner(ch8[3][3] board) ch8 {
+  for (var i32 i <- 0; i < 3; i <- i + 1) {
+    if (board[i][0] = board[i][1] and
+        board[i][1] = board[i][2] and
+        not board[i][0] = '_') {
+      return board[i][0];
+    }
+  }
+
+  $ diagonals 
+
+  if (board[0][0] = board[1][1] and 
+      board[1][1] = board[2][2] and
+      not board[0][0] = '_') {
+    return board[1][1];    
+  }
+
+  if (board[2][0] = board[1][1] and 
+      board[1][1] = board[0][2] and
+      not board[2][0] = '_') {
+    return board[1][1];    
+  }
+
+  return 0;
+}
+
+def func is_draw(ch8[3][3] board) i32 {
+  for (var i32 i <- 0; i < 3; i <- i + 1) {
+    for (var i32 j <- 0; j < 3; j <- j + 1) {
+      if (board[i][j] = '_') {
+        return 0;
+      } 
+    }
+  }
+  return 1;
+}
+
+def func main() i32 {
+  var ch8[3][3] board;
+  
+  $ set all empty squares in the board to '_'
+  for (var i32 i <- 0; i < 3; i <- i + 1) {
+    board[i] <- {'_' '_' '_'};
+  }
+
+  print_string("Welcome to Tic Tac Toe\n");
+  print_string("Enter moves in the form x y where the top left is 0 0\n\n");
+
+  var ch8[2] turns;
+  turns <- {'x' 'o'};
+
+  while (1) {
+    print_ch8(turns[0]);
+    print_string("'s turn\n");
+
+    print_string("Enter a x-coordinate: ");
+    var i32 x <- read_i32();
+
+    print_string("Enter a y-coordinate: ");
+    var i32 y <- read_i32();
+
+    print_ch8('\n');
+
+    if (x > 2 or x < 0 or y > 2 or y < 0) {
+      print_string("Error: Input must be between 0 and 2\n");
+      return 1;
+    }
+
+    if (not board[y][x] = '_') {
+      print_string("Error: That square has already been taken!\n");
+      return 1;
+    }
+
+    board[y][x] <- turns[0];
+    turns <- swap(turns);
+    print_board(board);
+
+    var ch8 winner <- is_winner(board);
+    if (not winner = 0) {
+      print_string("----------------\n");
+      print_ch8(winner);
+      print_string(" Wins!\n");
+      print_string("----------------\n");
+      return 0;
+    }
+
+    if (is_draw(board)) {
+      print_string("----------------\n");
+      print_string("Draw...\n");
+      print_string("----------------\n");
+      return 0;
+    }
+      
+    print_ch8('\n');
+  }
+
+  return 0;
+}

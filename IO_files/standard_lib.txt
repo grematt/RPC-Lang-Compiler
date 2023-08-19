@@ -1,0 +1,29 @@
+func print_ch8(ch8 ch) void;
+func print_i32(i32 i) void;
+func print_f64(f64 d) void;
+func read_ch8() ch8;
+func read_i32() i32;
+func read_f64() f64;
+func read_string_by_char() ch8;
+
+def func read_string() ch8[1000] {
+	var i32 i <- 0;
+	var ch8[1000] str;
+	var ch8 ch <- read_string_by_char();
+
+	while (not ch = 0) {
+		str[i] <- ch;
+		i <- i + 1;
+		ch <- read_string_by_char();
+	}
+
+	return str;
+}
+
+def func print_string(ch8[1000] arr) void {
+	var i32 i <- 0;
+	while (not arr[i] = 0) {
+		print_ch8(arr[i]);
+		i <- i + 1;
+	}
+}

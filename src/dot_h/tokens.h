@@ -1,0 +1,45 @@
+#ifndef TOKENS_H
+#define TOKENS_H
+
+// tokens are negative so when characters are returned by get_next_tok(), 
+// there is no potential for misreading a token as a char or vice versa.
+enum Token {
+  eof_tok = -1,
+  func_tok = -2,
+  id_tok = -3,
+  i32_decl_tok = -4,
+  f64_decl_tok = -5,
+  ch8_decl_tok = -6,
+  f64_tok = -7,
+  i32_tok = -8,
+  ch8_tok = -9,
+  def_tok = -10,
+  add_tok = -11,
+  sub_tok = -12,
+  div_tok = -13,
+  multi_tok = -14,
+  less_tok = -15,
+  less_eq_tok = -16,
+  greater_tok = -17,
+  greater_eq_tok = -18,
+  equal_tok = -19,
+  bin_expr_tok = -20,
+  if_tok = -22,
+  otherwise_tok = -23,
+  return_tok = -24,
+  assignment_tok = -25,
+  var_dec_tok = -26,
+  while_tok = -27,
+  for_tok = -28,
+  string_tok = -29,
+  i32_arr_tok = -30,
+  f64_arr_tok = -31,
+  ch8_arr_tok = -32,
+  void_ret_tok = -33,
+  and_tok = -34,
+  or_tok = -35,
+  not_tok = -36,
+  none = -100,
+};
+
+#endif
