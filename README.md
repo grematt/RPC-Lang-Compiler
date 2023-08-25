@@ -151,7 +151,17 @@ if (not 1 = 2) {
 ```
 
 # Compilation
-The compiler can be compiled using the makefile, specifically rule "make rpc". <br> <br>
+The compiler can be compiled using the makefile, specifically rule "make rpc". <br>
+To generate an output file from a text source file, run 
+```
+./rpc <input_name>.txt
+```
+Or optionally
+```
+./rpc <input_name>.txt -ir
+```
+To print the LLVM IR for the input. <br><br>
+
 As I did not make a linker, an external linker must be used to generate an executable from a source text file. Furthermore, if you use any
 of the I/O functions from standard_lib.txt/cpp, you need to link using a C++ compiler, compiling and linking standard_lib.cpp.
 So, to compile a source text file, run the compiler executable as follows:
@@ -160,7 +170,8 @@ g++ <output_name>.o standard_lib.cpp <g++ args>
 ```
 Or leave off standard_lip.cpp if you wish to have no I/O.
 # Bugs
-While I tried to test as much as I could, I surely missed some bugs. If you find any, please let me know by means of an issue.
+While I tried to test as much as I could, I surely missed some bugs. If you find any, please let me know by means of an issue. <br>
+There are also some memory leaks present, though only in main-loop.cpp in generate_output_file. This code was taken from the LLVM website where they outlined how to generate an output file, so to my understanding these leaks are not a fault of my own code.
 
 
 
