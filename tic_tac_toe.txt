@@ -41,6 +41,11 @@ def func is_winner(ch8[3][3] board) ch8 {
         not board[i][0] = '_') {
       return board[i][0];
     }
+    if (board[0][i] = board[1][i] and
+        board[1][i] = board[2][i] and
+        not board[0][i] = '_') {
+      return board[0][i];
+    }
   }
 
   $ diagonals 
